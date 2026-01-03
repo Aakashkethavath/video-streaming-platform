@@ -34,19 +34,19 @@ const upload = multer({
 
 // 2. Upload Route
 // verifyToken = User must be logged in
-// upload.single('video') = Expect one file named 'video'
+// POST: Upload Video
 router.post('/upload', verifyToken, upload.single('video'), async (req, res) => {
-    try {
-        if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+  try {
+    const newVideo = new Video({
+      title: req.file.originalname,
+      description: req.body.description || "",
+      filename: req.file.filename,
+      size: req.file.size, // <--- SAVE FILE SIZE HERE (from Multer)
+      uploader: req.user.id,
+      status: 'uploaded'
+    });
 
-        // Create Database Entry
-        const newVideo = new Video({
-            title: req.body.title || req.file.originalname,
-            filename: req.file.filename,
-            uploader: req.user.id // Get user ID from token
-        });
-
-        await newVideo.save();
+    await newVideo.save();
 
         res.status(201).json({
             message: "Video uploaded successfully",
