@@ -29,12 +29,18 @@ const io = new Server(server, {
 
 // 5. Middleware (Settings)
 // Make 'io' accessible to our routes
+// 5. Middleware (Settings)
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
-app.use(cors()); // Allow frontend to talk to backend
-app.use(express.json()); // Allow backend to understand JSON data
+
+app.use(cors());
+
+// Increase limit to 500MB to allow large video uploads
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true })); 
+
 app.use('/api/auth', authRoutes);
 app.use('/api/videos', videoRoutes);
 // 6. Basic Route (Test if server is working)

@@ -41,7 +41,7 @@ router.post('/upload', verifyToken, upload.single('video'), async (req, res) => 
       title: req.file.originalname,
       description: req.body.description || "",
       filename: req.file.filename,
-      size: req.file.size, // <--- SAVE FILE SIZE HERE (from Multer)
+      size: req.file.size, // SAVE FILE SIZE HERE 
       uploader: req.user.id,
       status: 'uploaded'
     });

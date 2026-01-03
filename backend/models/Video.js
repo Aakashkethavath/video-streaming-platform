@@ -8,7 +8,7 @@ const videoSchema = new mongoose.Schema({
   uploadDate:  { type: Date, default: Date.now },
 
   // Status for the progress bar
-  status:      { type: String, enum: ['pending', 'processing', 'completed'], default: 'pending' },
+  status:    { type: String, enum: ['uploaded', 'processing', 'completed', 'failed'], default: 'uploaded' },
 
   // Result of sensitivity analysis
   sensitivity: { type: String, enum: ['safe', 'flagged', 'unverified'], default: 'unverified' }
