@@ -370,13 +370,54 @@ const Dashboard = () => {
                             return true;
                         }).map((video) => (
                             <div key={video._id} className="video-card">
-                                <div style={{ borderRadius: '8px', overflow: 'hidden', backgroundColor: '#000', aspectRatio: '16/9' }}>
+                                {/* VIDEO THUMBNAIL CARD */}
+                                <div
+                                    onClick={() => {
+                                        // Only open player if video is ready and safe
+                                        if (video.status === 'completed' && video.sensitivity !== 'flagged') {
+                                            setPreviewVideo(video);
+                                        }
+                                    }}
+                                    style={{
+                                        borderRadius: '8px',
+                                        overflow: 'hidden',
+                                        backgroundColor: '#000',
+                                        aspectRatio: '16/9',
+                                        position: 'relative',
+                                        cursor: (video.status === 'completed' && video.sensitivity !== 'flagged') ? 'pointer' : 'default'
+                                    }}
+                                >
                                     {video.status === 'completed' && video.sensitivity !== 'flagged' ? (
-                                        <video controls width="100%" height="100%" src={`http://localhost:5000/api/videos/stream/${video.filename}`} />
+                                        <>
+                                            {/* 1. Static Video Preview (Acts as thumbnail) */}
+                                            <video
+                                                src={`http://localhost:5000/api/videos/stream/${video.filename}#t=1.0`}
+                                                preload="metadata"
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            />
+
+                                            {/* 2. Play Button Overlay (Matches Admin feel) */}
+                                            <div className="play-overlay" style={{
+                                                position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                backgroundColor: 'rgba(0,0,0,0.15)',
+                                                transition: 'background 0.3s'
+                                            }}>
+                                                <div style={{
+                                                    width: '50px', height: '50px', backgroundColor: 'rgba(0,0,0,0.7)',
+                                                    borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                    color: '#fff', fontSize: '1.5rem', paddingLeft: '4px',
+                                                    border: '2px solid rgba(255,255,255,0.8)'
+                                                }}>
+                                                    ▶
+                                                </div>
+                                            </div>
+                                        </>
                                     ) : (
+                                        // PROCESSING / FLAGGED STATE (Keep this as is)
                                         <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexDirection: 'column' }}>
                                             <span style={{ fontSize: '2rem' }}>{video.sensitivity === 'flagged' ? '⚠️' : '⚙️'}</span>
-                                            <p>{video.sensitivity === 'flagged' ? 'Sensitive' : 'Processing...'}</p>
+                                            <p>{video.sensitivity === 'flagged' ? 'Sensitive Content' : 'Processing...'}</p>
                                         </div>
                                     )}
                                 </div>
