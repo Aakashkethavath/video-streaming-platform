@@ -22,14 +22,13 @@ const server = http.createServer(app);
 // 4. Initialize Socket.io (for real-time progress bars)
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // This is where our Frontend will run
+    origin: "https://video-streaming-platform-99n4.onrender.com", // This is where our Frontend will run
     methods: ["GET", "POST"]
   }
 });
 
 // 5. Middleware (Settings)
 // Make 'io' accessible to our routes
-// 5. Middleware (Settings)
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -47,7 +46,6 @@ app.use('/api/videos', videoRoutes);
 app.get('/', (req, res) => {
   res.send('Video Platform API is running...');
 });
-// ... existing code ...
 
 // GLOBAL ERROR HANDLER (Add this before server.listen)
 app.use((err, req, res, next) => {
@@ -63,7 +61,7 @@ app.use((err, req, res, next) => {
 });
 
 // 7. Start the Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
