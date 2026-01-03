@@ -1,4 +1,4 @@
 import { io } from "socket.io-client";
 
 // Connect to our backend server
-export const socket = io("http://localhost:5000");
+export const socket = io("https://video-streaming-platform-99n4.onrender.com");

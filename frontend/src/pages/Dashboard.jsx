@@ -28,8 +28,8 @@ const Dashboard = () => {
     const fetchVideos = async () => {
         try {
             const endpoint = isEditor
-                ? "http://localhost:5000/api/videos/my-videos"
-                : "http://localhost:5000/api/videos/feed";
+                ? "https://video-streaming-platform-99n4.onrender.com/api/videos/my-videos"
+                : "https://video-streaming-platform-99n4.onrender.com/api/videos/feed";
             const res = await axios.get(endpoint, { headers: { Authorization: token } });
             if (Array.isArray(res.data)) setVideos(res.data);
         } catch (err) { console.error("Video fetch error", err); }
@@ -38,10 +38,10 @@ const Dashboard = () => {
     const fetchAdminData = async () => {
         if (!isAdmin) return;
         try {
-            const userRes = await axios.get("http://localhost:5000/api/auth/users", { headers: { Authorization: token } });
+            const userRes = await axios.get("https://video-streaming-platform-99n4.onrender.com/api/auth/users", { headers: { Authorization: token } });
             if (Array.isArray(userRes.data)) setUsers(userRes.data);
 
-            const videoRes = await axios.get("http://localhost:5000/api/videos/admin/all", { headers: { Authorization: token } });
+            const videoRes = await axios.get("https://video-streaming-platform-99n4.onrender.com/api/videos/admin/all", { headers: { Authorization: token } });
             if (Array.isArray(videoRes.data)) setAdminVideos(videoRes.data);
         } catch (err) {
             if (err.response && (err.response.status === 401 || err.response.status === 403)) {
@@ -64,7 +64,7 @@ const Dashboard = () => {
     // --- ACTIONS ---
     const handleBlockVideo = async (videoId) => {
         try {
-            await axios.put(`http://localhost:5000/api/videos/${videoId}/block`, {}, { headers: { Authorization: token } });
+            await axios.put(`https://video-streaming-platform-99n4.onrender.com/api/videos/${videoId}/block`, {}, { headers: { Authorization: token } });
             toast.success("Video blocked");
             fetchAdminData();
         } catch (err) { toast.error("Failed to block"); }
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
     const handleUnblockVideo = async (videoId) => {
         try {
-            await axios.put(`http://localhost:5000/api/videos/${videoId}/unblock`, {}, { headers: { Authorization: token } });
+            await axios.put(`https://video-streaming-platform-99n4.onrender.com/api/videos/${videoId}/unblock`, {}, { headers: { Authorization: token } });
             toast.success("Video unblocked");
             fetchAdminData();
         } catch (err) { toast.error("Failed to unblock"); }
@@ -81,7 +81,7 @@ const Dashboard = () => {
     const handleDeleteVideo = async (videoId) => {
         if (!window.confirm("Delete permanently?")) return;
         try {
-            await axios.delete(`http://localhost:5000/api/videos/${videoId}`, { headers: { Authorization: token } });
+            await axios.delete(`https://video-streaming-platform-99n4.onrender.com/api/videos/${videoId}`, { headers: { Authorization: token } });
             toast.success("Video deleted");
             fetchAdminData();
             fetchVideos();
@@ -92,7 +92,7 @@ const Dashboard = () => {
     const handleDeleteUser = async (userId) => {
         if (!window.confirm("Delete User?")) return;
         try {
-            await axios.delete(`http://localhost:5000/api/auth/users/${userId}`, { headers: { Authorization: token } });
+            await axios.delete(`https://video-streaming-platform-99n4.onrender.com/api/auth/users/${userId}`, { headers: { Authorization: token } });
             toast.success("User deleted");
             fetchAdminData();
         } catch (err) { toast.error("Failed to delete user"); }
@@ -322,7 +322,7 @@ const Dashboard = () => {
                             <button className="close-btn" onClick={() => setPreviewVideo(null)}>✕</button>
                         </div>
                         <div className="modal-body">
-                            <video controls autoPlay style={{ width: '100%', maxHeight: '70vh', outline: 'none' }} src={`http://localhost:5000/api/videos/stream/${previewVideo.filename}`} />
+                            <video controls autoPlay style={{ width: '100%', maxHeight: '70vh', outline: 'none' }} src={`https://video-streaming-platform-99n4.onrender.com/api/videos/stream/${previewVideo.filename}`} />
                         </div>
                     </div>
                 </div>
@@ -391,7 +391,7 @@ const Dashboard = () => {
                                         <>
                                             {/* 1. Static Video Preview (Acts as thumbnail) */}
                                             <video
-                                                src={`http://localhost:5000/api/videos/stream/${video.filename}#t=1.0`}
+                                                src={`https://video-streaming-platform-99n4.onrender.com/api/videos/stream/${video.filename}#t=1.0`}
                                                 preload="metadata"
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                             />

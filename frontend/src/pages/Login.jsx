@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     const toastId = toast.loading("Logging in...");
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const res = await axios.post("https://video-streaming-platform-99n4.onrender.com/api/auth/login", { email, password });
       toast.dismiss(toastId);
       toast.success("Welcome back!");
       login(res.data.user, res.data.token);
