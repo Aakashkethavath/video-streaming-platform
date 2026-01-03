@@ -374,7 +374,7 @@ const Dashboard = () => {
                                 <div
                                     onClick={() => {
                                         // Only open player if video is ready and safe
-                                        if (video.status === 'completed' && video.sensitivity !== 'flagged') {
+                                        if (video.status === 'completed' && (video.sensitivity !== 'flagged' || isEditor)) {
                                             setPreviewVideo(video);
                                         }
                                     }}
