@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
     const toastId = toast.loading("Creating account...");
     try {
-      await axios.post("https://video-streaming-platform-99n4.onrender.com/api/auth/register", { 
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { 
         username, 
         email, 
         password,

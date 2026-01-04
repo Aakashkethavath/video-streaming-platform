@@ -22,7 +22,7 @@ const server = http.createServer(app);
 // 4. Initialize Socket.io (for real-time progress bars)
 const io = new Server(server, {
   cors: {
-    origin: "https://video-streaming-platform-99n4.onrender.com", // This is where our Frontend will run
+    origin: process.env.LOCAL_CLIENT_URL, // This is where our Frontend will run
     methods: ["GET", "POST"]
   }
 });

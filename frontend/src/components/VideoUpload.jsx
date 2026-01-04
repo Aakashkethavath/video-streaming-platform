@@ -60,7 +60,7 @@ const VideoUpload = () => {
       setStatus("Uploading...");
 
       // Send file to Backend
-      await axios.post("https://video-streaming-platform-99n4.onrender.com/api/videos/upload", formData, {
+      await axios.post(import.meta.env.VITE_API_URL + "/api/videos/upload", formData, {
         headers: {
           "Authorization": token, // Send our login token
           //"Content-Type": "multipart/form-data",
