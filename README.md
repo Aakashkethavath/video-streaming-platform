@@ -99,27 +99,27 @@ npm run dev
 ```
 Access the application at http://localhost:5173.
 
-🚀 Usage
-Registration/Login: Create a new account. To test different roles (Admin vs. Editor), you may need to manually update the user's role field in your MongoDB database.
+### 🚀 Usage
+* **Registration/Login:** Create a new account. To test different roles (Admin vs. Editor), you may need to manually update the user's role field in your MongoDB database.
 
-Upload Video: Log in as an Editor or Admin, navigate to the Dashboard, and upload a video file.
+* **Upload Video:** Log in as an Editor or Admin, navigate to the Dashboard, and upload a video file.
 
-Track Progress: Watch the real-time progress bar as the system simulates "Upload," "Processing," and "Sensitivity Analysis."
+* **Track Progress:** Watch the real-time progress bar as the system simulates "Upload," "Processing," and "Sensitivity Analysis."
 
-Stream Content: Click on any "Safe" video to start streaming. "Flagged" videos will be hidden or restricted based on your role.
+* **Stream Content:** Click on any "Safe" video to start streaming. "Flagged" videos will be hidden or restricted based on your role.
 
-Admin Moderation: Log in as an Admin to view all content (including flagged videos) and perform deletion or unblocking actions.
+* **Admin Moderation:** Log in as an Admin to view all content (including flagged videos) and perform deletion or unblocking actions.
 
-🔮 Future Scope
-Cloud Storage Integration: Replace local disk storage with AWS S3 or Google Cloud Storage for better scalability.
+### 🔮 Future Scope
+* **Cloud Storage Integration:** Replace local disk storage with AWS S3 or Google Cloud Storage for better scalability.
 
-Advanced Filtering: Add search functionality by upload date, file size, and duration.
+* **Advanced Filtering:** Add search functionality by upload date, file size, and duration.
 
-Video Compression: Integrate FFmpeg for automatic video compression and thumbnail generation.
+* **Video Compression:** Integrate FFmpeg for automatic video compression and thumbnail generation.
 
-Real AI Integration: Replace simulated sensitivity logic with actual AI APIs (e.g., AWS Rekognition) for robust content moderation.
+* **Real AI Integration:** Replace simulated sensitivity logic with actual AI APIs (e.g., AWS Rekognition) for robust content moderation.
 
-📂 Project Structure
+### 📂 Project Structure
 ```
 
 video-streaming-platform/
